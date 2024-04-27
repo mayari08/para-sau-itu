@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ask Someone on a Date</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 100px;
+      position: relative;
+      background-color: #e7bdc4;
+      color: white;
+    }
+    .button-container {
+      display: flex;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+    }
+     button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin: 10px;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      width: 100px;
+      transition: all 0.3s ease; 
+      color: #ad3a4c;
+    }
+    #no {
+      width: 100px; /* Set the width of the "No" button */
+    }
+    #yes:hover, #yes:active {
+      width: 120px; /* Increase width on hover and click */
+      height: 40px; /* Increase height on hover and click */
+    }
+    .card {
+      display: none;
+      position: absolute;
+      top: 75%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border: 1px solid #ccc;
+      border-radius: 40px;
+      padding: 20px;
+      max-width: 400px;
+      background-color: #ffb6c1; /* Baby pink background color */
+      box-shadow: 10px 10px 20px #cc6699; /* Dark pink shadow */
+      z-index: 2;
+    }
+    .card-header {
+      font-size: 35px;
+      font-weight: bold;
+      color: #fff;
+      margin-top: 0;
+    }
+    .card-content {
+      margin-top: 20px;
+    }
+    .card img {
+      max-width: 100%;
+    }
+    .same-size {
+      font-size: 20px;
+    }
+    .background-text {
+      position: absolute;
+      color: black;
+      opacity: 0.8;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Will you go on a date with me?</h1>
+  <img src="basta.gif" alt="Animated GIF" style="width: 300px; height: 200px;">
+  <div class="button-container">
+    <button id="yes" onclick="showDateCard()">Yes</button>
+    <button id="no" onmouseover="growYesButton()" onclick="growYesButton()">No</button>
+  </div>
+
+  <div id="dateCard" class="card">
+    <div class="card-header">YEY!</div>
+    <img src="basta1.gif" alt="Another Animated GIF" style="width: 300px; height: 200px;">
+    <div class="card-content">
+      <h1 class="same-size">SEE YOU!</h1>
+      <h2 class="same-size">When: May 07</h2>
+      <h3 class="same-size">Where: Sit 'n Zip</h3>
+      <h4 class="same-size">Why: Celeb of our 7th Monthsary</h4>
+      <h5 class="same-size">KKB muna sorry broke pa kc aqOh</h5>
+    </div>
+  </div>
+
+  <div id="backgroundTextContainer"></div>
+
+  <script>
+    function moveNo() {
+      var noButton = document.getElementById('no');
+      var buttonRect = noButton.getBoundingClientRect();
+      var maxX = window.innerWidth - buttonRect.width;
+      var maxY = window.innerHeight - buttonRect.height;
+      var randomX = Math.max(0, Math.min(maxX, Math.floor(Math.random() * maxX))); // Adjusted randomX calculation
+      var randomY = Math.max(0, Math.min(maxY, Math.floor(Math.random() * maxY)));
+      noButton.style.opacity = 1;
+      noButton.style.transform = 'translate(' + randomX + 'px, ' + randomY + 'px)';
+    }
+
+    function showDateCard() {
+      var card = document.getElementById('dateCard');
+      card.style.display = 'block';
+    }
+
+    function growYesButton() {
+      var yesButton = document.getElementById('yes');
+      var currentWidth = yesButton.offsetWidth;
+      var currentHeight = yesButton.offsetHeight;
+      var newWidth = currentWidth * 1.1; // Increase width by 10%
+      var newHeight = currentHeight * 1.1; // Increase height by 10%
+      yesButton.style.width = newWidth + 'px';
+      yesButton.style.height = newHeight + 'px';
+
+      // Add background texts
+      var texts = ["'di mo na 'ko mahal?'", "ahh ganon", "ah ganon?", "??????","edi 'wag", "MAG YES KA NA KASI!", "Dun ka na sa babae mo"];
+      var randomText = texts[Math.floor(Math.random() * texts.length)];
+
+      var textElement = document.createElement('div');
+      textElement.classList.add('background-text');
+      textElement.textContent = randomText;
+
+      // Randomly position the text on the screen
+      var screenWidth = window.innerWidth;
+      var screenHeight = window.innerHeight;
+      var xPos = Math.random() * screenWidth;
+      var yPos = Math.random() * screenHeight;
+
+      textElement.style.left = xPos + 'px';
+      textElement.style.top = yPos + 'px';
+      
+
+      document.getElementById('backgroundTextContainer').appendChild(textElement);
+    }
+  </script>
+</body>
+</html>
